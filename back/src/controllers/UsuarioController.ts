@@ -24,4 +24,16 @@ export default class UsuarioController {
         }
     }
 
+    async read(req: Request, res: Response) {
+        try {
+            const usuarios = await usuarioRepository.query(`
+                SELECT * FROM usuarios
+            `)
+
+            return res.json(usuarios)
+        } catch (error) {
+            console.log(error)
+            return res.json({message: "Internal Server Error"})
+        }
+    }
 }
