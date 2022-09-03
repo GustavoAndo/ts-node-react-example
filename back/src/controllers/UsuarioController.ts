@@ -52,4 +52,20 @@ export default class UsuarioController {
             return res.json({message: "Internal Server Error"})
         }
     }
+    
+    async delete(req: Request, res: Response) {
+        const { id } = req.params
+
+        try {
+            const excluirUsuario = await usuarioRepository.query(`
+                DELETE FROM usuarios WHERE id=$1
+            `, [id])
+
+            return res.json({message: "Excluído com sucesso!"})
+        } catch (error) {
+            console.log(error)
+            return res.json({message: "Internal Server Error"})
+        }
+    }
+
 }
