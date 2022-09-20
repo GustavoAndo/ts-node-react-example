@@ -7,7 +7,7 @@ interface Props {
 function ExcluirUsuario({ idUsuario }: Props) {
     const excluirUsuario = async(id: number) => {
         try {
-            const excluirTarefa = await fetch('http://localhost:3001/excluirUsuario/' + id, {
+            const excluirTarefa = await fetch('http://localhost:5000/excluirUsuario/' + id, {
                 method: 'DELETE'
             })
             console.log(excluirTarefa)

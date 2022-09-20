@@ -9,8 +9,11 @@ export class Usuario {
     @Column()
     nome: string
 
-    @Column()
+    @Column({unique: true})
     email: string
+
+    @Column({type: "text"})
+    senha: string
 
     @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     dinheiro: number

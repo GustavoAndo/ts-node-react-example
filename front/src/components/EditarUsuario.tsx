@@ -22,7 +22,7 @@ function EditarUsuario({ usuario }: Props) {
       e.preventDefault();
       try {
         const body = { nome, email, nro_jogos, dinheiro};
-        const response = await fetch('http://localhost:3001/atualizarUsuario/' + usuario.id, {
+        const response = await fetch('http://localhost:5000/atualizarUsuario/' + usuario.id, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)

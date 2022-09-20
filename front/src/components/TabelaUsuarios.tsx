@@ -15,7 +15,7 @@ function TabelaUsuarios() {
 
     const getUsuarios = async() => {
         try {
-            const response = await fetch('http://localhost:3001/usuarios')
+            const response = await fetch('http://localhost:5000/usuarios')
             const jsonData = await response.json()
             setUsuarios(jsonData)
         } catch (error) {

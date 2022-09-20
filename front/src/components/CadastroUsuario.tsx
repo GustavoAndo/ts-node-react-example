@@ -10,7 +10,7 @@ function CadastroUsuario() {
       e.preventDefault();
       try {
         const body = { nome, email, nro_jogos, dinheiro };
-        const response = await fetch('http://localhost:3001/cadastrarUsuario', {
+        const response = await fetch('http://localhost:5000/cadastrarUsuario', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)

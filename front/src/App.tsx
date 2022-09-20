@@ -1,18 +1,22 @@
-import React, { Fragment } from 'react';
-import './App.css';
-import CadastroUsuario from './components/CadastroUsuario'
-import TabelaUsuarios from './components/TabelaUsuarios';
+import {BrowserRouter, Routes, Route } from 'react-router-dom';
+import  { useState } from 'react'
+import Login from "./components/Login"
+import Home from "./components/Home"
+import { render } from 'react-dom';
 
 function App() {
-  return (
-    <Fragment>
-      <div className="container">
-        <h1 className="text-center mt-5">Tabela Usuarios</h1>
-        <CadastroUsuario></CadastroUsuario>
-        <TabelaUsuarios></TabelaUsuarios>
-      </div>
-    </Fragment>
-  )
+    const [ isAuthenticated, setIsAuthenticated ] = useState(false)
+
+    return (
+        
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/home" element={<Home/>}/>,
+                    <Route path="/login" element={<Login/>}/>
+                </Routes>
+                
+            </BrowserRouter>
+    )
 }
 
 export default App;
