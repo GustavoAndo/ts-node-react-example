@@ -93,21 +93,51 @@ export default class UsuarioController {
         const usuario: any = await usuarioRepository.findOneBy({ email })
 
         if (!usuario) {
-            res.json({message: "Email inválido!"})
+            return res.json({message: "Email inválido!"})
         }
 
         const verificarSenha = await bcrypt.compare(senha, usuario.senha)
     
         if (!verificarSenha){
-            res.json({message: "Senha inválida!"})
+            return res.json({message: "Senha inválida!"})
         }
 
-        const token = jwt.sign({ id: usuario.id }, process.env.JWT_PASS ?? '', {expiresIn: "8h"})
+        const token = jwt.sign({ id: usuario.id }, process.env.JWT_PASS ?? '', {expiresIn: "1h"})
 
-        console.log(token)
+        const { password: _, ...usuarioLogin } = usuario
+
+		return res.json({
+			usuario: usuarioLogin,
+			token: token,
+		})
     }   
 
     async getProfile(req: Request, res: Response) {
-        return res.json(req.user)
+        const { authorization } = req.headers
+
+        if (!authorization) {
+            return res.json({message: "Autorização negada!"})
+        }
+    
+        const token = authorization.split(' ')[1]
+
+        try {
+            const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload
+    
+            const usuario: any = await usuarioRepository.findOneBy({ id })
+         
+            if (!usuario) {
+                return res.json({message: "Internal Server Error"})
+            }
+        
+            const { senha: _, ...usuarioLogado } = usuario
+    
+            return res.json(usuarioLogado)
+        } catch {
+            return res.json({message: "Autorização negada!"})     
+        }
+
+    
+       // return req.user
     }
 }
