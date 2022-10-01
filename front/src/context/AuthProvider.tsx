@@ -1,10 +1,8 @@
 import { AuthContext } from './AuthContext'
 import { useState, useEffect } from 'react'
 import { Usuario } from '../types/Usuario'
-import { Api } from '../hooks/Api'
 
 export const AuthProvider = ({children} : {children: JSX.Element}) => {
-    const api = Api()
 
     const [usuario, setUsuario] = useState<Usuario | null>(null) 
 
@@ -12,7 +10,16 @@ export const AuthProvider = ({children} : {children: JSX.Element}) => {
         const validateToken = async () => {
             const storageData = localStorage.getItem('token')
             if (storageData) {
-                const data = await api.validateToken(storageData)
+                const data = await fetch(`${process.env.REACT_APP_SERVER}/getProfile`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${storageData}`
+                    }
+                }).then(resp => resp.json())
+                .then((data) => {
+                    return data
+                }).catch(err => console.log(err))
                 if (data.id) {
                     setUsuario(data);
                 }
@@ -23,7 +30,18 @@ export const AuthProvider = ({children} : {children: JSX.Element}) => {
 
 
     const signin = async (email: string, senha: string) => {
-        const data = await api.signin(email, senha);
+        const data = await fetch(`${process.env.REACT_APP_SERVER}/login`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email, senha}),
+        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                return data
+            })
+            .catch((err) => console.log(err))
         console.log(data)
         if (data.usuario && data.token) {
             setUsuario(data.usuario);

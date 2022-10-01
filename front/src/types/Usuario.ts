@@ -5,4 +5,5 @@ export type Usuario = {
     senha?: string,
     dinheiro?: number,
     nro_jogos?: number
+    perfil?: string
 }

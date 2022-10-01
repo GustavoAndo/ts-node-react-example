@@ -1,5 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
+export type Perfil = 'administrador' | 'gestor' | 'colaborador'
+
 @Entity('usuarios')
 export class Usuario {
 
@@ -21,4 +23,6 @@ export class Usuario {
     @Column({name: "nro_jogos"})
     nroJogos: number
 
+    @Column({type: "enum", enum:['administrador', 'gestor', 'colaborador'], default: 'colaborador', nullable: false})
+    perfil: Perfil
 }

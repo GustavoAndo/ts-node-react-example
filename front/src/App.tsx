@@ -4,6 +4,8 @@ import Home from "./components/Home"
 import { RequireAuth } from './context/RequireAuth'
 import { AuthContext } from './context/AuthContext'
 import { useContext } from 'react'
+import Gestor from './components/Gestor'
+import Admin from './components/Admin'
 
 function App() {
     const auth = useContext(AuthContext)
@@ -17,7 +19,9 @@ function App() {
         <>
             {auth.usuario && <button onClick={handleLogout}>Sair</button>}
             <Routes>
-                <Route path="/" element={<RequireAuth><Home/></RequireAuth>}/>,
+                <Route path="/" element={<RequireAuth><Home/></RequireAuth>}/>
+                <Route path="/gestor" element={<RequireAuth nivel='gestor'><Gestor/></RequireAuth>}/>
+                <Route path="/administrador" element={<RequireAuth nivel='administrador'><Admin/></RequireAuth>}/>
                 <Route path="/login" element={<Login/>}/>
             </Routes>
         </>

@@ -102,7 +102,7 @@ export default class UsuarioController {
             return res.json({message: "Senha inválida!"})
         }
 
-        const token = jwt.sign({ id: usuario.id }, process.env.JWT_PASS ?? '', {expiresIn: "1h"})
+        const token = jwt.sign({ id: usuario.id }, process.env.JWT_PASS ?? '', {expiresIn: "8h"})
 
         const { password: _, ...usuarioLogin } = usuario
 
