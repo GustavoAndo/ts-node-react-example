@@ -14,7 +14,6 @@ export const AuthProvider = ({children} : {children: JSX.Element}) => {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${storageData}`
                     }
                 }).then(resp => resp.json())
                 .then((data) => {

@@ -1,8 +1,7 @@
 import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
 
-function Admin() {
-  const auth = useContext(AuthContext)
+function Forbidden() {
 
   return (
     <div className="container">
@@ -12,4 +11,4 @@ function Admin() {
   )
 }
 
-export default Admin
+export default Forbidden

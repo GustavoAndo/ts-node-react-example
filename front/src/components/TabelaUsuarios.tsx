@@ -3,6 +3,7 @@ import EditarUsuario from './EditarUsuario'
 import ExcluirUsuario from './ExcluirUsuario'
 
 interface UsuarioDto {
+    perfil: string,
     id: number,
     nome: string,
     email: string,
@@ -35,6 +36,7 @@ function TabelaUsuarios() {
                     <th scope="col">Email</th>
                     <th scope="col">Nº de Jogos</th>
                     <th scope="col">Dinheiro</th>
+                    <th scope="col">Perfil</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -45,6 +47,7 @@ function TabelaUsuarios() {
                         <td>{usuario.email}</td>
                         <td>{usuario.nro_jogos}</td>
                         <td>{usuario.dinheiro}</td>
+                        <td>{usuario.perfil}</td>
                         <td>
                             <EditarUsuario usuario={usuario}></EditarUsuario>
                             <ExcluirUsuario idUsuario={usuario.id}></ExcluirUsuario>

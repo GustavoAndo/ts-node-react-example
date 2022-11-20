@@ -19,9 +19,10 @@ function App() {
         <>
             {auth.usuario && <button onClick={handleLogout}>Sair</button>}
             <Routes>
+                <Route path="/administrador" element={<RequireAuth nivel='administrador'><Admin/></RequireAuth>}/>
                 <Route path="/" element={<RequireAuth><Home/></RequireAuth>}/>
                 <Route path="/gestor" element={<RequireAuth nivel='gestor'><Gestor/></RequireAuth>}/>
-                <Route path="/administrador" element={<RequireAuth nivel='administrador'><Admin/></RequireAuth>}/>
+                
                 <Route path="/login" element={<Login/>}/>
             </Routes>
         </>

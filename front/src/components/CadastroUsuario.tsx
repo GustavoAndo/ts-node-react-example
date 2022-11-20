@@ -5,11 +5,12 @@ function CadastroUsuario() {
     const [email, setEmail] = useState("")
     const [nro_jogos, setNro_jogos] = useState("")
     const [dinheiro, setDinheiro] = useState("")
+    const [perfil, setPerfil] = useState("")
   
     const cadastrarUsuario = async (e: any) => {
       e.preventDefault();
       try {
-        const body = { nome, email, nro_jogos, dinheiro };
+        const body = { nome, email, nro_jogos, dinheiro, perfil };
         const response = await fetch('http://localhost:5000/cadastrarUsuario', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -27,6 +28,7 @@ function CadastroUsuario() {
         setEmail("")
         setNro_jogos("")
         setDinheiro("")
+        setPerfil("")
     }
 
     return (
@@ -78,6 +80,13 @@ function CadastroUsuario() {
                         className='form-control mb-2' 
                         value={dinheiro}
                         onChange={e => setDinheiro(e.target.value)}
+                    />
+                    <input 
+                        type='text' 
+                        placeholder='Perfil' 
+                        className='form-control mb-2' 
+                        value={perfil}
+                        onChange={e => setPerfil(e.target.value)}
                     />
                 </div>
                 <div className="modal-footer">
